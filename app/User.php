@@ -34,4 +34,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function setPasswordAttribute($value) {
         $this->attributes['password'] = Hash::make($value);
     }
+
+    public function entity() {
+        return $this->hasOne('App\User');
+    }
 }

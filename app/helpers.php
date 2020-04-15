@@ -17,11 +17,12 @@ if (!function_exists('get_distance')) {
 }
 
 if (!function_exists('set_exp')) {
-    function set_exp($distance) {
-        if (0 <= $distance && $distance < 10) $value = 5;
-        else if (10 <= $distance && $distance < 30) $value = 3;
-        else if ($distance <= env('LOCATION_RADIUS', 50)) $value = 1;
-        
+    function set_exp($distance, $xp = 2) {
+        $value = 0;
+        if ($distance < env('LOCATION_RADIUS', 50) && $distance > 0) {
+            $value = (env('LOCATION_RADIUS', 50) - $distance) * $xp;
+        }
+   
         return $value;
     }
 }

@@ -11,13 +11,23 @@ class LocationController extends Controller
     }
 
     public function location(Request $request) {
-        $distance = get_distance($request->user()->safe_long, $request->user()->safe_lat, $request->long, $request->lat);
+        $user =  $request->user();
+        $distance = get_distance($request->user()->safe_long, $user->safe_lat, $request->long, $request->lat);
         if ($distance <= env('LOCATION_RADIUS', 50)) {
-            $entity = $request->user()->entity;
+            $entity = $user->entity;
 
             // @todo: checks for api
+
             $entity->exp += set_exp($distance); 
+            
+            if ($entity->exp > max_exp() * 0.66) {
+                $entity->level++;
+                $user->research_points += rand(100, 200);
+                $entity->exp = 0;
+            }
+            
             $entity->save();
+            $user->save();
         }
 
         return response(200);

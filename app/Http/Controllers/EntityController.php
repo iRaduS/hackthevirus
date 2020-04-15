@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Entity;
 
 class EntityController extends Controller
 {
@@ -12,6 +11,6 @@ class EntityController extends Controller
     }
 
     public function my_entity(Request $request) {
-        return response()->json(['status' => 'success', 'entity' => Entity::where('user_id', $request->user()->id)->first()]);
+        return response()->json(['status' => 'success', 'entity' => $request->user()->entity]);
     }
 }

@@ -16,7 +16,7 @@ class AuthController extends Controller
             'password_confirmation' => 'required|string|min:6|max:32'
         ]);
         
-        $user = User::create(['name' => $request->name, 'email' => $request->email, 'password' => $request->password, 'api_key' => bin2hex(random_bytes(64))]);
+        $user = User::create(['name' => $request->name, 'email' => $request->email, 'password' => $request->password, 'api_key' => bin2hex(random_bytes(64)), 'safe_lat' => floatval($request->safe_lat), 'safe_long' => floatval($request->safe_long)]);
         return response()->json(['status' => 'success', 'api_key' => $user->api_key]);
     }
 

@@ -15,7 +15,8 @@ class LocationController extends Controller
         $distance = get_distance($request->user()->safe_long, $request->user()->safe_lat, $request->long, $request->lat);
         if ($distance <= env('LOCATION_RADIUS', 50)) {
             $entity = Entity::where('user_id', $request->user()->id)->first();
-            
+
+            // @todo: checks for api
             $entity->exp += set_exp($distance); 
             $entity->save();
         }

@@ -18,7 +18,6 @@ if (!function_exists('get_distance')) {
 
 if (!function_exists('set_exp')) {
     function set_exp($distance, $xp = 1.5) {
-
         $value = 0;
         if ($distance < env('LOCATION_RADIUS', 50) && $distance >= 0) {
             $value = (env('LOCATION_RADIUS', 50) - $distance) * $xp;

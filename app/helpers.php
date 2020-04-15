@@ -17,12 +17,19 @@ if (!function_exists('get_distance')) {
 }
 
 if (!function_exists('set_exp')) {
-    function set_exp($distance, $xp = 0.05) {
+    function set_exp($distance, $ratio = 0.05) {
         $value = 0;
         if ($distance < env('LOCATION_RADIUS', 50) && $distance >= 0) {
-            $value = (env('LOCATION_RADIUS', 50) - $distance) * $xp;
+            $value = (env('LOCATION_RADIUS', 50) - $distance) * $ratio;
         }
    
         return $value;
+    }
+}
+
+if (!function_exists('max_exp')) {
+    function max_exp($ratio = 0.05) {
+        $api_calls = 60*60*24 / 5; // how many times set_exp is called per day
+        return $value = $api_calls * env('LOCATION_RADIUS', 50) * $ratio;
     }
 }

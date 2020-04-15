@@ -11,6 +11,8 @@ class EntityController extends Controller
     }
 
     public function my_entity(Request $request) {
-        return response()->json(['status' => 'success', 'entity' => $request->user()->entity]);
+        $entity = $request->user()->entity;
+
+        return response()->json(['status' => 'success', 'level' => $entity->level, 'exp' => $entity->exp]);
     }
 }

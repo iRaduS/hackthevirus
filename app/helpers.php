@@ -30,6 +30,6 @@ if (!function_exists('set_exp')) {
 if (!function_exists('max_exp')) {
     function max_exp($ratio = 0.05) {
         $api_calls = 60*60*24 / 5; // how many times set_exp is called per day
-        return $value = $api_calls * env('LOCATION_RADIUS', 50) * $ratio;
+        return $api_calls * env('LOCATION_RADIUS', 50) * $ratio;
     }
 }

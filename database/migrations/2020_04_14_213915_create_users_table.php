@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('api_key')->unique();
             $table->integer('research_points')->default(100);
+            $table->float('safe_long')->nullable();
+            $table->float('safe_lat')->nullable();
             $table->timestamps();
         });
     }

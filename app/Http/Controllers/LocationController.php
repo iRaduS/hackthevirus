@@ -12,7 +12,7 @@ class LocationController extends Controller
 
     public function location(Request $request) {
         $user =  $request->user();
-        $distance = get_distance($request->user()->safe_long, $user->safe_lat, $request->long, $request->lat);
+        $distance = get_distance($user->safe_long, $user->safe_lat, $request->long, $request->lat);
         if ($distance <= env('LOCATION_RADIUS', 50)) {
             $entity = $user->entity;
 

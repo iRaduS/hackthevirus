@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\User;
+use App\Entity;
 
 class AuthController extends Controller
 {
@@ -19,6 +20,8 @@ class AuthController extends Controller
         if ($validator->fails()) return response()->json(['status' => 'error', 'message' => 'There are some fields which are not valid check your password, username and email.']);
         
         $user = User::create(['name' => $request->name, 'email' => $request->email, 'password' => $request->password, 'api_key' => bin2hex(random_bytes(64)), 'safe_lat' => floatval($request->safe_lat), 'safe_long' => floatval($request->safe_long)]);
+        Entity::create(['user_id' => $user->id]);
+
         return response()->json(['status' => 'success', 'api_key' => $user->api_key]);
     }
 

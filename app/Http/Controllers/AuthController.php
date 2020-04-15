@@ -12,8 +12,7 @@ class AuthController extends Controller
         $this->validate($request, [
             'name' => 'required|alpha_num|string|min:4|max:32',
             'email' => 'required|string|email|unique:users|min:6|max:64',
-            'password' => 'required|string|confirmed|min:6|max:32',
-            'password_confirmation' => 'required|string|min:6|max:32'
+            'password' => 'required|string|min:6|max:32'
         ]);
         
         $user = User::create(['name' => $request->name, 'email' => $request->email, 'password' => $request->password, 'api_key' => bin2hex(random_bytes(64)), 'safe_lat' => floatval($request->safe_lat), 'safe_long' => floatval($request->safe_long)]);

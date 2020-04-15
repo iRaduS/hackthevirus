@@ -22,7 +22,7 @@ class LocationController extends Controller
             
             if ($entity->exp > max_exp() * 0.66) {
                 $entity->level++;
-                $user->research_points += rand(100, 200);
+                $user->research_points += rand(75, 175);
                 $entity->exp = 0;
             }
             

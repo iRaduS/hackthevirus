@@ -42,6 +42,6 @@ class AuthController extends Controller
     }
 
     public function my_user(Request $request) {
-        return response()->json(['status' => 'success', 'user' => $request->user()]);
+        return response()->json(['status' => 'success', 'name' => $request->user()->name, 'email' => $request->user()->email]);
     }
 }

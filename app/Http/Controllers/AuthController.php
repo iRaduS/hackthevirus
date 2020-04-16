@@ -12,7 +12,7 @@ class AuthController extends Controller
 {
     public function register(Request $request) {
         $validator = Validator::make($request->only(['name', 'email', 'password']), [
-            'name' => 'required|alpha_num|string|min:4|max:32',
+            'name' => 'required|alpha_num|string|min:4|max:12',
             'email' => 'required|string|email|unique:users|min:6|max:64',
             'password' => 'required|string|min:6|max:32'
         ]);

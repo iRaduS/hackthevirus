@@ -20,7 +20,7 @@ if (!function_exists('set_exp')) {
     function set_exp($distance, $ratio = 0.05) {
         $value = 0;
         if ($distance < env('LOCATION_RADIUS', 50)) {
-            if ($distance < 10)
+            if ($distance < 15)
                 $value = (env('LOCATION_RADIUS', 50)) * $ratio;
             else 
                 $value = (env('LOCATION_RADIUS', 50) - $distance) * $ratio;

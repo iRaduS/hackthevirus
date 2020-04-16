@@ -33,4 +33,8 @@ class ShopController extends Controller
 
         return response()->json(['status' => 'success', 'message' => 'You have purchased with success this costume.']);
     }
+
+    public function my_costumes(Request $request) {
+        
+    }
 }

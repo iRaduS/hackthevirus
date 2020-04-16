@@ -19,7 +19,7 @@ class LocationController extends Controller
 
             // @todo: checks for api
 
-            $entity->exp += set_exp($distance); 
+            $entity->exp += set_exp($distance) * req_time(10, $entity->updated_at, Carbon::now()) * 2; 
             $ban = true;
 
             if (Carbon::now()->startOfDay()->gt($entity->levelup_at)) {
@@ -34,7 +34,6 @@ class LocationController extends Controller
                 $entity->level++;
                 $entity->levelup_at = Carbon::now();
                 $entity->exp = 0;
-                //$user->research_points += rand(75, 175);
             } 
                     
             $entity->save();

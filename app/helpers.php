@@ -33,3 +33,13 @@ if (!function_exists('max_exp')) {
         return $api_calls * env('LOCATION_RADIUS', 50) * $ratio;
     }
 }
+
+if (!function_exists('req_time')) {
+    function  req_time($cooldown = 10, $start, $end){
+        if ($end->diffInSeconds($start) >= $cooldown) {
+            return 1;
+        } else if ($end->diffInSeconds($start) > 0) {
+            return ($end->diffInSeconds($start)) / 10;
+        } else return 0;
+    }
+}

@@ -23,18 +23,19 @@ class ShopController extends Controller
         if ($request->user()->research_points < $costume->costume_price) return response()->json(['status' => 'error', 'message' => 'You do not have enough Research Points.']);
         if ($logs) return response()->json(['status' => 'error', 'message' => 'You have already bought this item.']);
 
-        if ($costume->id !== 4) //buy level
-            EntityCostume::create(['entity_id' => $request->user()->entity->id, 'costume_id' => $costume->id]);
+        if ($costume->id !== 4) EntityCostume::create(['entity_id' => $request->user()->entity->id, 'costume_id' => $costume->id]);
+        
         $request->user()->research_points -= $costume->costume_price;
-
-        if ($costume->id === 4)
-            $request->user()->level++;
         $request->user()->save();
+
+        if ($costume->id === 4) $request->user()->entity->level++;
+        $request->user()->entity->save();
 
         return response()->json(['status' => 'success', 'message' => 'You have purchased with success this costume.']);
     }
 
     public function my_costumes(Request $request) {
-        
+        $logs = EntityCostume::where(['entity_id' => $request->user()->entity->id])->get();
+        return response()->json($logs);
     }
 }

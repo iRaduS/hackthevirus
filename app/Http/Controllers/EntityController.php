@@ -11,10 +11,10 @@ class EntityController extends Controller
         $this->middleware('auth');
     }
 
-    public function my_entity(Request $request) {
-        $entity = $request->user()->entity;
-        return response()->json(['status' => 'success', 'level' => $entity->level, 'exp' => $entity->exp, 'max_exp' => round(max_exp() * 0.66)]);
-    }
+    // public function my_entity(Request $request) {
+    //     $entity = $request->user()->entity;
+    //     return response()->json(['status' => 'success']);
+    // }
 
     public function leaderboard(Request $request) {
         $users = User::join('entities', 'users.id', '=', 'entities.user_id')->select('users.name', 'users.research_points', 'entities.level', 'entities.exp')->orderBy('entities.level', 'DESC')->limit(100)->get();

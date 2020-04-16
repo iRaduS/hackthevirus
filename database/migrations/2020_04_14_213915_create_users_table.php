@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->integer('research_points')->default(100);
             $table->double('safe_long')->nullable();
             $table->double('safe_lat')->nullable();
+            $table->integer('distance')->nullable();
             $table->timestamps();
         });
     }

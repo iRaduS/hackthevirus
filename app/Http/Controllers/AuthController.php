@@ -42,6 +42,7 @@ class AuthController extends Controller
     }
 
     public function my_user(Request $request) {
-        return response()->json(['status' => 'success', 'name' => $request->user()->name, 'email' => $request->user()->email]);
+        $entity = $request->user()->entity;
+        return response()->json(['status' => 'success', 'name' => $request->user()->name, 'email' => $request->user()->email, 'level' => $entity->level, 'exp' => $entity->exp, 'max_exp' => round(max_exp() * 0.66), 'research_points' => $request->user()->research_points, 'distance' => $request->user()->distance]);
     }
 }

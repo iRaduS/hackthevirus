@@ -21,5 +21,6 @@ $router->post('location', ['as' => 'location', 'uses' => 'LocationController@loc
 $router->post('register', ['as' => 'register', 'uses' => 'AuthController@register']);
 $router->post('login', ['as' => 'login', 'uses' => 'AuthController@login']);
 $router->get('my-user', ['as' => 'my-user', 'uses' => 'AuthController@my_user', 'middleware' => 'auth']);
-// $router->get('my-entity', ['as' => 'my-entity', 'uses' => 'EntityController@my_entity']);
 $router->get('leaderboard', ['as' => 'leaderboard', 'uses' => 'EntityController@leaderboard']);
+$router->get('shop', ['as' => 'shop', 'uses' => 'ShopController@shop']);
+$router->post('shop/buy/{id}', ['as' => 'shop_buy', 'uses' => 'ShopController@shop_buy']);

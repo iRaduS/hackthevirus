@@ -27,7 +27,10 @@ class LocationController extends Controller
             }
             
             if ($entity->exp > max_exp() * 0.66 && $ban == false) {
-                $user->research_points += ($entity->exp - max_exp()) * 0.05 + rand(80, 120); // Primeste %% din punctele ramase (exp) [MAXIM: 700 (caz ideal)] + ceva intre 80 si 120 ca si Research Points 
+                $points = abs($entity->exp - max_exp() * 0.66) * 0.5 + rand(80, 120);
+                $user->research_points += $points; // Primeste 50% din punctele ramase (exp) [MAXIM: 700 (caz ideal)] + ceva intre 80 si 120 ca si Research Points 
+                $user->save(); 
+
                 $entity->level++;
                 $entity->levelup_at = Carbon::now();
                 $entity->exp = 0;
@@ -35,7 +38,7 @@ class LocationController extends Controller
             } 
                     
             $entity->save();
-            $user->save();
+
         }
 
         return response(200);

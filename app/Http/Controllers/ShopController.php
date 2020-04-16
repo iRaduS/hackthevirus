@@ -31,7 +31,7 @@ class ShopController extends Controller
         if ($costume->id === 4) $request->user()->entity->level++;
         $request->user()->entity->save();
 
-        return response()->json(['status' => 'success', 'message' => 'You have purchased with success this costume.']);
+        return response()->json(['status' => 'success', 'message' => 'You have purchased with success this item.']);
     }
 
     public function my_costumes(Request $request) {

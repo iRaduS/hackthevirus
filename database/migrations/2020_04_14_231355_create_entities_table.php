@@ -16,8 +16,9 @@ class CreateEntitiesTable extends Migration
         Schema::create('entities', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->index();
-            $table->integer('level')->default(1);
+            $table->integer('level')->default(0);
             $table->integer('exp')->default(0);
+            $table->dateTime('levelup_at')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

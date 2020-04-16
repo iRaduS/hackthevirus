@@ -12,7 +12,7 @@ class Entity extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'user_id', 'level', 'exp'
+        'id', 'user_id', 'level', 'exp', 'levelup_at'
     ];
 
     /**
@@ -20,6 +20,10 @@ class Entity extends Model
      *
      * @var array
      */
+    protected $dates = [
+        'levelup_at'
+    ];
+
     protected $hidden = [
         'created_at', 'updated_at', 'id', 'user_id'
     ];

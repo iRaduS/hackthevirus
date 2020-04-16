@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class LocationController extends Controller
 {
@@ -18,16 +19,25 @@ class LocationController extends Controller
 
             // @todo: checks for api
 
-            $entity->exp += set_exp($distance); 
-            
-            if ($entity->exp > max_exp() * 0.66) {
-                $entity->level++;
-                $user->research_points += rand(75, 175);
-                $entity->exp = 0;
+            $entity->exp += set_exp($distance) * req_time(10, $entity->updated_at, Carbon::now()) * 2; 
+            $ban = true;
+
+            if (Carbon::now()->startOfDay()->gt($entity->levelup_at)) {
+                $ban = false; // Sa nu poti da de doua ori in aceeasi zi level up
             }
             
+            if ($entity->exp > max_exp() * 0.66 && $ban == false) {
+                $points = abs($entity->exp - max_exp() * 0.66) * 0.5 + rand(80, 120);
+                $user->research_points += $points; // Primeste 50% din punctele ramase (exp) [MAXIM: 700 (caz ideal)] + ceva intre 80 si 120 ca si Research Points 
+                $user->save(); 
+
+                $entity->level++;
+                $entity->levelup_at = Carbon::now();
+                $entity->exp = 0;
+            } 
+                    
             $entity->save();
-            $user->save();
+
         }
 
         return response(200);

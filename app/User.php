@@ -28,7 +28,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var array
      */
     protected $hidden = [
-        'password', 'api_key', 'id', 'created_at', 'updated_at'
+        'password', 'api_key', 'id', 'created_at', 'updated_at', 'safe_lat', 'safe_long'
     ];
 
     public function setPasswordAttribute($value) {
